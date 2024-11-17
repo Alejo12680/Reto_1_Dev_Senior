@@ -1,6 +1,11 @@
 import java.util.Scanner;
 
 public class App {
+
+    // Variables Globales
+    static Scanner consola = new Scanner(System.in);
+    static String[] planetas = {"Mercurio", "Venus", "Marte", "Júpiter", "Saturno", "Urano", "Neptuno"};
+
     public static void main(String[] args) throws Exception {
         Menu();
     }
@@ -8,22 +13,26 @@ public class App {
     // Metodos
     public static void Menu() {
 
-        var consola = new Scanner(System.in);
         int opc = 0;
 
         do {
-            System.out.println("*** BIENVENIDO A VIAJES INTERESTELAR ***");
-            System.out.println("Donde desea viajar: ");
-            System.out.println("01. Marte");
-            System.out.println("02. Mercurio");
-            System.out.println("03. Saturno");
-            System.out.println("04. Salir..");
+            System.out.println( "░█▀█░█░░░█▀█░█▀█░█▀▀░▀█▀░░░░█▀▀░█░█░█▀█░█▀▄░█▀▀░█▀▀░█▀▀\r\n" + 
+                                "░█▀▀░█░░░█▀█░█░█░█▀▀░░█░░░░░█▀▀░▄▀▄░█▀▀░█▀▄░█▀▀░▀▀█░▀▀█\r\n" + 
+                                "░▀░░░▀▀▀░▀░▀░▀░▀░▀▀▀░░▀░░▀░░▀▀▀░▀░▀░▀░░░▀░▀░▀▀▀░▀▀▀░▀▀▀\r\n");
+            System.out.println("     ** MENU PRINCIPAL **");
+            System.out.println("╔═..══════════════════════════..═╗");
+            System.out.println("░ 01. Seleccione el Destino      ░");
+            System.out.println("░ 02. Seleccione la Nave Espacial░");
+            System.out.println("░ 03. Inicio del Viaje           ░");
+            System.out.println("░ 04. Salir..                    ░");
+            System.out.println("╚═..══════════════════════════..═╝");
+            System.out.print("Digita una Opcion: ");
             opc = consola.nextInt();
 
             switch (opc) {
                 case 1:
                     // Metodo
-                    System.out.println("Marte bienvenido\n");
+                    System.out.println("Seleccion de planeta");
                     break;
 
                 case 2:
@@ -33,7 +42,15 @@ public class App {
 
                 case 3:
                     // Metodo
-                    System.out.println("Saturno bienvenido\n");
+                    System.out.println("   .   -- The Travel 12% ... --\r\n" + 
+                                       "  .'.\r\n" + 
+                                       "  |o|\r\n" + 
+                                       " .'o'.\r\n" + 
+                                       " |.-.|\r\n" + 
+                                       " '   '\r\n" + 
+                                       "  ( )\r\n" + 
+                                       "   )\r\n" + 
+                                       "  ( )\r\n");
                     break;
 
                 case 4:
@@ -49,5 +66,19 @@ public class App {
 
         consola.close();
     }
+
+    public static void SelectPlanet() {
+
+    }
+
+    public static void SelectNave() {
+
+    }
+
+    public static void calculateResour() {
+
+    }
+
+
 
 }
