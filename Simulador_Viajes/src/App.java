@@ -4,7 +4,10 @@ public class App {
 
     // Variables Globales
     static Scanner consola = new Scanner(System.in);
-    static String[] planetas = {"Mercurio", "Venus", "Marte", "Júpiter", "Saturno", "Urano", "Neptuno"};
+    static String[] planet = {"Mercurio", "Venus", "Marte", "Júpiter", "Saturno", "Urano", "Neptuno"};
+    static double[] distance = {91.7, 42.4, 78.3, 628.9,  1284.4, 2721.4, 4345.4};
+    static String[] naves = {"Nave Leviatan", "Nave Olimpus", "Nave Pandora"};
+    static double[] speed = {900000.0, 100000.0, 50000.0};
 
     public static void main(String[] args) throws Exception {
         Menu();
@@ -31,8 +34,8 @@ public class App {
 
             switch (opc) {
                 case 1:
-                    // Metodo
-                    System.out.println("Seleccion de planeta");
+                    // Metodo:
+                    SelectPlanet();
                     break;
 
                 case 2:
@@ -68,6 +71,42 @@ public class App {
     }
 
     public static void SelectPlanet() {
+        int opcion = 0;
+
+        do {
+            System.out.println("         ,\r\n" + //
+                               "       _=|_\r\n" + //
+                               "     _[_## ]_\r\n" + //
+                               "_  +[_[_+_]P/    _    |_       ____      _=-\r\n" + 
+                               " ~---\\_I_I_[=\\--~ ~~--[o]--==-|##==]-=-~~ \r\n" + 
+                               "-~ /[_[_|_]_]\\\\  -_  [[=]]    |====]  __  \r\n" + 
+                               "  /    \"|\"    \\      ^U-U^  - |    - ~ .~\r\n" + 
+                               " ~~--__~~~--__~~-__   H_H_    |_     --     \r\n" + 
+                               "-. _  ~~~  ~~~=~~  -~~--~~  ~~~-    ~~--  ._\r\n" + 
+                               "             _     . -      _ _ ");
+             System.out.println("** SELECCIONE EL PLANETA **");
+            System.out.println("╔═..═════════..═╗");
+            System.out.println("░ 01. Mercurio  ░");
+            System.out.println("░ 02. Venus     ░");
+            System.out.println("░ 03. Marte     ░");
+            System.out.println("░ 04. Júpiter   ░");
+            System.out.println("░ 05. Saturno   ░");
+            System.out.println("░ 06. Urano     ░");
+            System.out.println("░ 07. Neptuno   ░");
+            System.out.println("░ 09. Salir..   ░");
+            System.out.println("╚═..═════════..═╝");
+            System.out.print("Digita una Opcion: ");
+            opcion = consola.nextInt();
+
+            if (opcion < 0 || opcion >= 9) {
+                System.out.println("Saliendo del Menú Planeta...\n");
+                break;
+
+            } else {
+                System.out.printf("\n** Su destino es el planeta (%s) con una distancia de (%s) Millones de Kilometros **\n", planet[opcion-1], distance[opcion-1]);
+            }
+
+        } while (opcion!=9);
 
     }
 
