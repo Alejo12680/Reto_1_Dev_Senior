@@ -212,7 +212,7 @@ public class App {
     }
 
     public static void stopSpaceShip() {
-        
+        // parar la nave
     }
 
 }
