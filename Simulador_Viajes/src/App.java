@@ -30,8 +30,8 @@ public class App {
 
         do {
             System.out.println("░█▀█░█░░░█▀█░█▀█░█▀▀░▀█▀░░░░█▀▀░█░█░█▀█░█▀▄░█▀▀░█▀▀░█▀▀\r\n" +
-                               "░█▀▀░█░░░█▀█░█░█░█▀▀░░█░░░░░█▀▀░▄▀▄░█▀▀░█▀▄░█▀▀░▀▀█░▀▀█\r\n" +
-                               "░▀░░░▀▀▀░▀░▀░▀░▀░▀▀▀░░▀░░▀░░▀▀▀░▀░▀░▀░░░▀░▀░▀▀▀░▀▀▀░▀▀▀\r\n");
+                    "░█▀▀░█░░░█▀█░█░█░█▀▀░░█░░░░░█▀▀░▄▀▄░█▀▀░█▀▄░█▀▀░▀▀█░▀▀█\r\n" +
+                    "░▀░░░▀▀▀░▀░▀░▀░▀░▀▀▀░░▀░░▀░░▀▀▀░▀░▀░▀░░░▀░▀░▀▀▀░▀▀▀░▀▀▀\r\n");
             System.out.println("     ** MENU PRINCIPAL **");
             System.out.println("╔═..════════════════════════════..═╗");
 
@@ -49,7 +49,7 @@ public class App {
             } else {
                 System.out.printf("Su nave es: %s     \n", selectedNave);
             }
-            
+
             System.out.println(" 03. Inicio del Viaje              ");
             System.out.println(" 04. Salir..                       ");
             System.out.println("╚═..════════════════════════════..═╝");
@@ -62,8 +62,8 @@ public class App {
                     if (!planetSelected) {
                         SelectPlanet();
                     } else {
-                        System.out.println("╔═..══════════════════════════════════════════════..═╗");
-                        System.out.println("Ya has seleccionado un destino y no puedes cambiarlo.");
+                        System.out.println("\n╔═..══════════════════════════════════════════════..═╗");
+                        System.out.println(" Ya has seleccionado un destino y no puedes cambiarlo.");
                         System.out.println("╚═..══════════════════════════════════════════════..═╝\n");
                     }
                     break;
@@ -73,8 +73,8 @@ public class App {
                     if (!naveSelected) {
                         SelectNave();
                     } else {
-                        System.out.println("╔═..══════════════════════════════════════════════..═╗");
-                        System.out.println("Ya has seleccionado una nave para el viaje.");
+                        System.out.println("\n╔═..══════════════════════════════════════════════..═╗");
+                        System.out.println(" Ya has seleccionado una nave para el viaje.");
                         System.out.println("╚═..══════════════════════════════════════════════..═╝\n");
                     }
                     break;
@@ -165,23 +165,39 @@ public class App {
     }
 
     public static void Resour() throws InterruptedException {
-        System.out.println("Desea modificar los recusrsos a tu gusto? 0: Si. 1: No");
-        int calculo = consola.nextInt();
 
-        if (calculo == 0) {
-            userResour();
+        if (planetSelected && naveSelected) {
+            System.out.println("\n** MODIFICAR RECURSOS **");
+            System.out.println("╔═..═════..═╗");
+            System.out.println("░ 0. No     ░");
+            System.out.println("░ 1. Si     ░");
+            System.out.println("╚═..═════..═╝\n");
+            int calculo = consola.nextInt();
+
+            if (calculo == 0) {
+                userResour();
+            } else {
+                startTrip();
+            }
         } else {
-            startTrip();
-
+            System.out.println("\n╔═..══════════════════════════════════════════════..═╗");
+            System.out.println(" Debes Elegir una Nave y un Planeta para viajar.");
+            System.out.println("╚═..══════════════════════════════════════════════..═╝\n");
         }
 
     }
 
     public static void userResour() throws InterruptedException {
-        System.out.println("Cuanto es la cantidad de oxigeno que desea agregar?");
+        System.out.println("╔═..══════════════════════════════════════════════..═╗");
+        System.out.println(" Cuanto es la cantidad de Oxigeno que desea agregar?");
+        System.out.println("╚═..══════════════════════════════════════════════..═╝\n");
         double oxygen = consola.nextDouble();
-        System.out.println("Cuanto es la cantidad de combustible que desea agregar?");
+
+        System.out.println("╔═..══════════════════════════════════════════════════..═╗");
+        System.out.println(" Cuanto es la cantidad de Combustible que desea agregar?");
+        System.out.println("╚═..══════════════════════════════════════════════════..═╝\n");
         double fuel = consola.nextDouble();
+
         startTrip();
 
     }
