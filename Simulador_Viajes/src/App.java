@@ -23,7 +23,9 @@ public class App {
     static String[] ship = { "Orion", "Voyager", "Vostok", "Pandora", "Skywal" };
     static double[] speed = { 90.0, 10.0, 5.0, 80.0, 50.0 };
     static int[] passengers = { 5, 85, 90, 15, 45 };
+    static int days = 0;
 
+    static int cantPerson = 0;
     static String selectedPlanet = "Ninguno";
     static double selectedDistence = 0.0;
     static String selectedDescription = "";
@@ -33,9 +35,10 @@ public class App {
     static String selectedShip = "Ninguno";
     static boolean naveSelected = false;
 
+    static String[] events = { "Lluvia de Asteroides", "Daños en la Nave", "Desvio de la Nave", "Falta de Recursos" };
+    static String[] states = { "Inicio del viaje", "Mitad del camino", "Llegada al destino" };
     static Random rm = new Random();
     static int porcentaje;
-    static String[] events = { "Lluvia de Asteroides", "Daños en la Nave", "Desvio de la Nave", "Falta de Recursos" };
     static int indiceAleatorio;
 
     public static void main(String[] args) throws Exception {
@@ -194,21 +197,22 @@ public class App {
 
     public static void Capacity() throws InterruptedException {
 
+        // formula para sacar el tiempo es Tiempo = Distancia/Velocidad
         double result = selectedDistence / selectedSpeed;
-        int days = (int) Math.floor(result);
+        days = (int) Math.floor(result);
 
         if (planetSelected && naveSelected) {
             System.out.println("\n** GESTOR DE CAPACIDAD DE LA NAVE **");
-            System.out.println("╔═..══════════════════════════════════════════════════..═╗");
+            System.out.println("╔═..═══════════════════════════════════════════════..═╗");
             System.out.println(
                     " Su nave es " + selectedShip + " y su capacidad es de " + selectedPassengers + " pasajeros");
             System.out.println(" con una velocidad de " + selectedDistence + " Millones de Km/H");
             System.out.printf(" el viaje dura aproximadamente %d dias.\n", days);
-            System.out.println("╚═..══════════════════════════════════════════════════..═╝");
+            System.out.println("╚═..═══════════════════════════════════════════════..═╝");
             System.out.print("Cuantos pasajeros van a viajar? ");
-            int person = consola.nextInt();
+            cantPerson = consola.nextInt();
 
-            if (person > selectedPassengers && person <= 0) {
+            if (cantPerson > selectedPassengers && cantPerson <= 0) {
                 System.out.println("\n╔═..══════════════════════════════════════════════════════════..═╗");
                 System.out.println(" Excede la capacidad de la nave, sera redirigido al menu de naves.");
                 System.out.println("╚═..══════════════════════════════════════════════════════════..═╝");
@@ -249,59 +253,73 @@ public class App {
                         "___________|_|_\r\n");
 
         System.out.println("\n** GESTOR DE RECURSOS DE LA NAVE **");
-        System.out.println("╔═..════════════════════════════════════════════════..═╗");
-        System.out.println("░ Ingrese la cantidad de Oxigeno que desea llevar?     ░");
+        System.out.println("╔═..══════════════════════════════════════════..═╗");
+        System.out.print("░ Cuantas unidades de oxigeno va llevar? ");
         double oxygen = consola.nextDouble();
-        System.out.printf(" El oxigeno para el viaje es de %.1f unidades\n", oxygen);
+        System.out.printf("░ El oxigeno para el viaje es de %.1f unidades    ░\n\n", oxygen);
 
-        System.out.println("░ Ingrese la cantidad de Combustible que desea llevar? ░");
+        System.out.print("░ Cuantos galones va llevar para el viaje? ");
         double fuel = consola.nextDouble();
-        System.out.printf(" El combustible para el viaje es de %.1f unidades\n", fuel);
-        System.out.println("╚═..════════════════════════════════════════════════..═╝");
+        System.out.printf("░ El combustible para el viaje es de %.1f galones ░\n", fuel);
+        System.out.println("╚═..══════════════════════════════════════════..═╝");
 
         System.out.println("Presione 'Enter' para iniciar el viaje...");
         // Limpiamos el Buffer
         consola.nextLine();
         consola.nextLine();
         StartTrip();
-        
+
     }
 
     public static void StartTrip() throws InterruptedException {
 
+        // Calcula para la cantidad necesaria para llegar al destino
+        var totalOxigen = cantPerson * days * oxigenPorDayPerson;
+
+        System.out.println(totalOxigen);
+
+        // Calculo necesario para el combustible alcance y llegue a su destino
+        var totalFuel = selectedDistence * fuelConsumptionPorKm;
+
+        System.out.println(totalFuel);
+
         int porcentaje;
 
-        for (porcentaje = 1; porcentaje <= 100; porcentaje++) {
-            int mostrarEvento = rm.nextInt(10);
-
-            if (mostrarEvento < 0.5) {
-                indiceAleatorio = rm.nextInt(events.length);
-                System.out.print("\\r  .   -- The Travel " + porcentaje + "% " + events[indiceAleatorio] + "... --" +
-                        "  .'.\r\n" +
-                        "  |o|\r\n" +
-                        " .'o'.\r\n" +
-                        " |.-.|\r\n" +
-                        " '   '\r\n" +
-                        "  ( )\r\n" +
-                        "   )\r\n" +
-                        "  ( )\r\n");
-                Thread.sleep(200);
-                stopSpaceShip();
-                System.out.println();
-            } else
-                System.out.println("   .   -- The Travel " + porcentaje + "%" + "... --\r\n" +
-                        "  .'.\r\n" +
-                        "  |o|\r\n" +
-                        " .'o'.\r\n" +
-                        " |.-.|\r\n" +
-                        " '   '\r\n" +
-                        "  ( )\r\n" +
-                        "   )\r\n" +
-                        "  ( )\r\n");
-            Thread.sleep(200);
-            System.out.println();
-        }
-        System.out.println("Viaje Finalizado con Exito");
+        /*
+         * for (porcentaje = 1; porcentaje <= 100; porcentaje++) {
+         * int mostrarEvento = rm.nextInt(10);
+         * 
+         * if (mostrarEvento < 0.5) {
+         * indiceAleatorio = rm.nextInt(events.length);
+         * System.out.print("\\r  .   -- The Travel " + porcentaje + "% " +
+         * events[indiceAleatorio] + "... --" +
+         * "  .'.\r\n" +
+         * "  |o|\r\n" +
+         * " .'o'.\r\n" +
+         * " |.-.|\r\n" +
+         * " '   '\r\n" +
+         * "  ( )\r\n" +
+         * "   )\r\n" +
+         * "  ( )\r\n");
+         * Thread.sleep(200);
+         * stopSpaceShip();
+         * System.out.println();
+         * } else
+         * System.out.println("   .   -- The Travel " + porcentaje + "%" + "... --\r\n"
+         * +
+         * "  .'.\r\n" +
+         * "  |o|\r\n" +
+         * " .'o'.\r\n" +
+         * " |.-.|\r\n" +
+         * " '   '\r\n" +
+         * "  ( )\r\n" +
+         * "   )\r\n" +
+         * "  ( )\r\n");
+         * Thread.sleep(200);
+         * System.out.println();
+         * }
+         * System.out.println("Viaje Finalizado con Exito");
+         */
 
     }
 
