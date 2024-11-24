@@ -214,13 +214,14 @@ public class App {
             System.out.print("Cuantos pasajeros van a viajar? ");
             cantPerson = consola.nextInt();
 
-            if (cantPerson > selectedPassengers && cantPerson <= 0) {
-                Resour();
+            System.out.println(cantPerson);
+            System.out.println(selectedPassengers);
+            System.out.println(cantPerson > selectedPassengers || cantPerson <= 0);
 
-            } else {
-                System.out.println("\n╔═..══════════════════════════════════════════════════════════..═╗");
-                System.out.println(" Excede la capacidad de la nave, sera redirigido al menu de naves.");
-                System.out.println("╚═..══════════════════════════════════════════════════════════..═╝");
+            if (cantPerson > selectedPassengers || cantPerson <= 0) {
+                System.out.println("\n╔═..══════════════════════════════════════════════════════════════════════════════..═╗");
+                System.out.println(" Error excede la capacidad de la nave o esta vacia , sera redirigido al menu de naves.");
+                System.out.println("╚═..══════════════════════════════════════════════════════════════════════════════..═╝");
                 System.out.println("Presione 'Enter' para continuar...");
                 // Este fracmento sirve para que el usuario de Enter, toco dos
                 // consola.nextLine(); porque toca Limpia el buffer de entrada, porque
@@ -228,6 +229,10 @@ public class App {
                 consola.nextLine();
                 consola.nextLine();
                 SelectNave();
+                
+
+            } else {
+                Resour();
             }
 
         } else {
