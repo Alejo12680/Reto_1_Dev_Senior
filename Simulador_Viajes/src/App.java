@@ -148,13 +148,18 @@ public class App {
     }
 
     public static void startTrip() throws InterruptedException {
-
         int porcentaje;
     
         for (porcentaje = 1; porcentaje <= 100; porcentaje++) {
+            if (porcentaje == 50) {
+        System.out.println("*********************************"); 
+        System.out.println("*                               *");
+        System.out.println("* VAMOS POR LA MITAD DEL CAMINO *");
+        System.out.println("*                               *"); 
+        System.out.println("*********************************");
+            }
             int mostrarEvento = rm.nextInt(10);
-    
-         if (mostrarEvento < 0.5) {
+                 if (mostrarEvento < 0.5) {
             indiceAleatorio = rm.nextInt(events.length);
             System.out.print("  .   -- The Travel " + porcentaje + "% " + events[indiceAleatorio] + "... --" + 
          "  .'.\r\n" + 
@@ -179,14 +184,15 @@ public class App {
          "   )\r\n" + 
          "  ( )\r\n");
         Thread.sleep(250);
+        
+        }
         System.out.println();
-       }
         System.out.println("*******************************"); 
         System.out.println("*                             *");
         System.out.println("*  VIAJE FINALIZADO CON ÉXITO *");
         System.out.println("*                             *"); 
         System.out.println("*******************************");
-    
+        
     }
     
 
@@ -369,21 +375,15 @@ public class App {
       
 
     }
+
+    public static void mostrar (){
+        System.out.println("*********************************"); 
+        System.out.println("*                               *");
+        System.out.println("* VAMOS POR LA MITAD DEL CAMINO *");
+        System.out.println("*                               *"); 
+        System.out.println("*********************************");
+    }
 }
 
 
-        
-
-
     
-
-
-
-
-
-
-        
-    
-
-
-
