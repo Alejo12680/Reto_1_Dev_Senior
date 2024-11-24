@@ -142,38 +142,14 @@ public class App {
             } else {
                 System.out.printf("\n** Su nave es: (%s) con una velocidad de : (%s) Millones k/h **\n", naves[opcion1-1], speed[opcion1-1]);
             }
-            Resour();
-            opcion1 = 9;
-        } while (opcion1!=9);
-    }
-
-    public static void Resour() throws InterruptedException {
-        System.out.println("Desea modificar los recusrsos a tu gusto? 0: Si. 1: No");
-        int calculo = consola.nextInt();
-       
-        if (calculo == 0) {
-            userResour();
-        } else {
-             startTrip();
-    
+            startTrip();
+            opcion1 = 6;
+        } while (opcion1!=6);
     }
 
 
-
-}
-
-    public static void userResour() throws InterruptedException {
-        System.out.println("Cuanto es la cantidad de oxigeno que desea agregar?");
-        double oxygen = consola.nextDouble();
-        System.out.println("Cuanto es la cantidad de combustible que desea agregar?");
-        double fuel = consola.nextDouble(); 
-        startTrip();
-
-    }
 
     public static void startTrip() throws InterruptedException {
-
-       time(opcion, opcion1);
 
         int porcentaje;
     
@@ -207,38 +183,12 @@ public class App {
         Thread.sleep(250);
         System.out.println();
        }
-        System.out.println("Viaje Finalizado con Exito");
-
+        System.out.println("*******************************"); 
+        System.out.println("*                             *");
+        System.out.println("*  VIAJE FINALIZADO CON ÉXITO *");
+        System.out.println("*                             *"); 
+        System.out.println("*******************************");
     
-    }
-    
-    public static void time(int opcion, int opcion1){
-        
-            int planetaIndex = -1;
-            int naveIndex = -1;
-        
-            for (int i = 0; i < planet.length; i++) {
-                if (planet[i] != null) {
-                    planetaIndex = i;
-                    break;
-                }
-            }
-        
-            for (int i = 0; i < naves.length; i++) {
-                if (naves[i] != null) {
-                naveIndex = i;
-                break;
-            }
-        }
-    
-        if (planetaIndex == -1 || naveIndex == -1) {
-            System.out.println("Planeta o nave no encontrados. Intenta de nuevo.");
-        }
-    
-        double hour = distance[planetaIndex] / speed[naveIndex];
-       // double year = hour / 24 * 365.25;
-       // double eon = year / 1000000000; 
-        System.out.println("Su tiempo de viaje será de: " + hour + " " + "horas");
     }
     
 
@@ -258,9 +208,6 @@ public class App {
             case "Desvio de la Nave":
                 desvioNave();
                 break;
-            case "Falta de Recursos":
-                faltaRecursos();
-                break;
             default:
                 break;
         }
@@ -276,45 +223,57 @@ public class App {
                     System.out.println("Atención " + random[i]);
         
                     System.out.println("Para esquivar presione: w: para arriba, s: para abajo, a: para la izquierda, d: para la derecha.");
-                    String direccion = consola.next();
+                    String direccion = consola.next();                
+                    
+                    boolean a = true;
         
+                 do {
                     switch (direccion) {
                         case "w":
+                        if (i == 0) {
                            System.out.println("Subiendo");
                            System.out.println("Asteroide esquivado");
+                        } else {System.out.println("Te has estrellado con el asteroide, estas MUERTO");
+                        System.exit(0);}
                            break;
                         case "s":
+                        if (i == 1) {
                             System.out.println("Bajando");
                             System.out.println("Asteroide esquivado");
+                        } else {System.out.println("Te has estrellado con el asteroide, estas MUERTO");
+                        System.exit(0);}
                             break;
                         case "a":
+                        if (i == 3) {
                             System.out.println("Girando a la izquierda");
                             System.out.println("Asteroide esquivado");
+                        } else {System.out.println("Te has estrellado con el asteroide, estas MUERTO");
+                        System.exit(0);}
                             break;
                         case "d":
+                        if (i == 2) {
                             System.out.println("Girando a la derecha");
                             System.out.println("Asteroide esquivado");
+                        } else {System.out.println("Te has estrellado con el asteroide, estas MUERTO");
+                        System.exit(0);}
                             break;
                         default:
                             System.out.println("Entrada no valida");
+                            System.out.println("Te has estrellado con el asteroide, estas MUERTO");
+                            System.exit(0);
+                            a = true;
                             break;
-        
-        
+                       }   
+                 } while (a = false);
         
                 
-        
-
-
-
-
-            }     
        
         }
    
     public static void dañosNave () throws InterruptedException {
             System.out.println("Daños en la nave. Escaneando la estructura");
         for (int i = 0; i <= 100; i++) {
-            Thread.sleep(150);
+            Thread.sleep(100);
             System.out.println(i + "%");
         }
         System.out.println("Escaneo Completado");
@@ -325,7 +284,7 @@ public class App {
 
         String[] arrangement = {"Revisar el propulsor y cambiar las valvulas", "Revisar el sistema de refrigeramiento", "Arreglar la antena"};
 
-        System.out.print("Debe arregñar los daños ");
+        System.out.print("Debe arreglar los daños ");
         System.out.print("a: Revisar el propulsor y cambiar las valvulas \n" + " " +
                          "b: Revisar el sistema de refrigeramiento \n " + " " +
                          "c: Arreglar la antena" + " " );
@@ -333,6 +292,7 @@ public class App {
 
         switch (a) {
             case "a":
+            if (i == 0) {
                 System.out.println("Revisando el propulsor");
                 for (int e = 0; e <= 100; e++) {
                     Thread.sleep(100);
@@ -344,8 +304,11 @@ public class App {
                     System.out.println(e + "%");
                 }
                 System.out.println("Arreglo completado al 100%");
+            } else { System.out.println("No arreglaste los daños, la nave no pude seguir, te has barado en mitad de la nada");
+                System.exit(0);}
                 break;
             case "b":
+            if (i == 1) {
                 System.out.println("Revisando el sistema de Refrigeración");
                 for (int e = 0; e <= 100; e++) {
                     Thread.sleep(100);
@@ -357,50 +320,58 @@ public class App {
                     System.out.println(e + "%");
                 }
                 System.out.println("Arreglo completado al 100%");
+            } else { System.out.println("No arreglaste los daños, la nave no pude seguir, te has barado en mitad de la nada");
+            System.exit(0);}
                 break;
             case "c":
+            if (i == 2) {
                 System.out.println("Arreglando la antena de comunicación de la nave");
                 for (int e = 0; e <= 100; e++) {
                     Thread.sleep(100);
                     System.out.println(e + "%");
                 }
                 System.out.println("Arreglo completado al 100%");
+            }else { System.out.println("No arreglaste los daños, la nave no pude seguir, te has barado en mitad de la nada");
+            System.exit(0);}
                 break;
             default:
                     System.out.println("Entrada no valida");
+                    System.out.println("No arreglaste los daños, la nave no pude seguir, te has barado en mitad de la nada");
+                System.exit(0);
                 break;
         }
 
         }
    
     public static void desvioNave () throws InterruptedException {
+
         System.out.println("¡Atencion! La nave se está desviando de su rumbo");
         System.out.println("Dirigete a la cabina central y retoma el curso de la nave manualmente");
         System.out.println("*** ESTANDO EN LA CABINA ***");
+        String[] lead = {"Redirigiendo rumbo de la nave", "No has redefinido el rumbo, estas perdido" };
         System.out.println("Presiona: a para redirijir el rumbo");
         String a = consola.next();
 
        switch (a) {
         case "a":
-            System.out.println("Redirigiendo rumbo de la nave");
+            System.out.println(lead[0]);
             for (int i = 0; i <= 100; i++) {
-                Thread.sleep(150);
                 System.out.println(i + "%");
+                Thread.sleep(100);
             }
-            System.out.println("Rumbo definid0 completado");
+            System.out.println("Rumbo redefinido completado");
             break;
+       
         default:
         System.out.println("Entrada no valida");
+        System.out.println(lead[1]);
+            System.exit(0);
             break;
        }
+      
 
     }
-   
-    public static void faltaRecursos () {
-
-    }
-    }
-
+}
 
 
         
