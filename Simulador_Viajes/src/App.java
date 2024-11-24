@@ -204,8 +204,7 @@ public class App {
         if (planetSelected && naveSelected) {
             System.out.println("\n** GESTOR DE CAPACIDAD DE LA NAVE **");
             System.out.println("╔═..═══════════════════════════════════════════════..═╗");
-            System.out.println(
-                    " Su nave es " + selectedShip + " y su capacidad es de " + selectedPassengers + " pasajeros");
+            System.out.println(" Su nave es " + selectedShip + " y su capacidad es de " + selectedPassengers + " pasajeros");
             System.out.println(" con una velocidad de " + selectedDistence + " Millones de Km/H");
             System.out.printf(" el viaje dura aproximadamente %d dias.\n", days);
             System.out.println("╚═..═══════════════════════════════════════════════..═╝");
@@ -213,6 +212,9 @@ public class App {
             cantPerson = consola.nextInt();
 
             if (cantPerson > selectedPassengers && cantPerson <= 0) {
+                Resour();
+
+            } else {
                 System.out.println("\n╔═..══════════════════════════════════════════════════════════..═╗");
                 System.out.println(" Excede la capacidad de la nave, sera redirigido al menu de naves.");
                 System.out.println("╚═..══════════════════════════════════════════════════════════..═╝");
@@ -223,9 +225,6 @@ public class App {
                 consola.nextLine();
                 consola.nextLine();
                 SelectNave();
-
-            } else {
-                Resour();
             }
 
         } else {
