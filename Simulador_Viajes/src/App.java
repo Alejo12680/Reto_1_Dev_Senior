@@ -147,8 +147,6 @@ public class App {
         } while (opcion1!=6);
     }
 
-
-
     public static void startTrip() throws InterruptedException {
 
         int porcentaje;
