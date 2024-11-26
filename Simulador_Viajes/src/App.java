@@ -274,74 +274,58 @@ public class App {
         // Limpiamos el Buffer
         consola.nextLine();
         consola.nextLine();
-        StartTrip();
+        startTrip();
 
     }
 
-    public static void StartTrip() throws InterruptedException {
-
-        // Calcula para la cantidad necesaria para llegar al destino
-        var totalOxigen = cantPerson * days * oxigenPorDayPerson;
-
-        System.out.println(totalOxigen);
-
-        // Calculo necesario para el combustible alcance y llegue a su destino
-        var totalFuel = selectedDistence * fuelConsumptionPorKm;
-
-        System.out.println(totalFuel);
-
+    public static void startTrip() throws InterruptedException {
         int porcentaje;
-
+    
         for (porcentaje = 1; porcentaje <= 100; porcentaje++) {
+            if (porcentaje == 50) {
+        System.out.println("*********************************"); 
+        System.out.println("*                               *");
+        System.out.println("* VAMOS POR LA MITAD DEL CAMINO *");
+        System.out.println("*                               *"); 
+        System.out.println("*********************************");
+            }
             int mostrarEvento = rm.nextInt(10);
-
-            for (porcentaje = 1; porcentaje <= 100; porcentaje++) {
-                if (porcentaje == 50) {
-            System.out.println("*********************************"); 
-            System.out.println("*                               *");
-            System.out.println("* VAMOS POR LA MITAD DEL CAMINO *");
-            System.out.println("*                               *"); 
-            System.out.println("*********************************");
-                } 
-            
-
-            if (mostrarEvento < 0.5) {
-                indiceAleatorio = rm.nextInt(events.length);
-                System.out.print("  .   -- The Travel " + porcentaje + "% " + events[indiceAleatorio] + "... --" +
-                        "  .'.\r\n" +
-                        "  |o|\r\n" +
-                        " .'o'.\r\n" +
-                        " |.-.|\r\n" +
-                        " '   '\r\n" +
-                        "  ( )\r\n" +
-                        "   )\r\n" +
-                        "  ( )\r\n");
-                Thread.sleep(150);
-                stopSpaceShip();
-                System.out.println();
-            } else
-                System.out.println("   .   -- The Travel " + porcentaje + "%" + "... --\r\n" +
-                        "  .'.\r\n" +
-                        "  |o|\r\n" +
-                        " .'o'.\r\n" +
-                        " |.-.|\r\n" +
-                        " '   '\r\n" +
-                        "  ( )\r\n" +
-                        "   )\r\n" +
-                        "  ( )\r\n");
-            Thread.sleep(150);
-            System.out.println();
+                 if (mostrarEvento < 0.3) {
+            indiceAleatorio = rm.nextInt(events.length);
+            System.out.print("  .   -- The Travel " + porcentaje + "% " + events[indiceAleatorio] + "... --" + 
+         "  .'.\r\n" + 
+         "  |o|\r\n" + 
+         " .'o'.\r\n" + 
+         " |.-.|\r\n" + 
+         " '   '\r\n" + 
+         "  ( )\r\n" + 
+         "   )\r\n" + 
+         "  ( )\r\n");
+        Thread.sleep(250);
+         stopSpaceShip();
+         System.out.println();
+         } else 
+         System.out.println("   .   -- The Travel " + porcentaje + "%" +  "... --\r\n" + 
+         "  .'.\r\n" + 
+         "  |o|\r\n" + 
+         " .'o'.\r\n" + 
+         " |.-.|\r\n" + 
+         " '   '\r\n" + 
+         "  ( )\r\n" + 
+         "   )\r\n" + 
+         "  ( )\r\n");
+        Thread.sleep(250);
+        
         }
-        }
-        System.out.println("*******************************");
+        System.out.println();
+        System.out.println("*******************************"); 
         System.out.println("*                             *");
         System.out.println("*  VIAJE FINALIZADO CON ÉXITO *");
-        System.out.println("*                             *");
+        System.out.println("*                             *"); 
         System.out.println("*******************************");
-    
-
+        
     }
-
+    
     // Metodos Auxiliares
 
     public static void stopSpaceShip() throws InterruptedException {
@@ -444,10 +428,10 @@ public class App {
         String[] arrangement = { "Revisar el propulsor y cambiar las valvulas", "Revisar el sistema de refrigeramiento",
                 "Arreglar la antena" };
 
-        System.out.print("Debe arreglar los daños ");
-        System.out.print("a: Revisar el propulsor y cambiar las valvulas \n" + " " +
-                "b: Revisar el sistema de refrigeramiento \n " + " " +
-                "c: Arreglar la antena" + " ");
+        System.out.println("Debe arreglar los daños ");
+        System.out.println("a: Revisar el propulsor y cambiar las valvulas \n" +
+                         "b: Revisar el sistema de refrigeramiento \n " + 
+                         "c: Arreglar la antena" + " ");
         String a = consola.next();
 
         switch (a) {
