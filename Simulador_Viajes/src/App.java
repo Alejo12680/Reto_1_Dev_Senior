@@ -295,6 +295,16 @@ public class App {
         for (porcentaje = 1; porcentaje <= 100; porcentaje++) {
             int mostrarEvento = rm.nextInt(10);
 
+            for (porcentaje = 1; porcentaje <= 100; porcentaje++) {
+                if (porcentaje == 50) {
+            System.out.println("*********************************"); 
+            System.out.println("*                               *");
+            System.out.println("* VAMOS POR LA MITAD DEL CAMINO *");
+            System.out.println("*                               *"); 
+            System.out.println("*********************************");
+                } 
+            
+
             if (mostrarEvento < 0.5) {
                 indiceAleatorio = rm.nextInt(events.length);
                 System.out.print("  .   -- The Travel " + porcentaje + "% " + events[indiceAleatorio] + "... --" +
@@ -306,7 +316,7 @@ public class App {
                         "  ( )\r\n" +
                         "   )\r\n" +
                         "  ( )\r\n");
-                Thread.sleep(250);
+                Thread.sleep(150);
                 stopSpaceShip();
                 System.out.println();
             } else
@@ -319,14 +329,16 @@ public class App {
                         "  ( )\r\n" +
                         "   )\r\n" +
                         "  ( )\r\n");
-            Thread.sleep(250);
+            Thread.sleep(150);
             System.out.println();
+        }
         }
         System.out.println("*******************************");
         System.out.println("*                             *");
         System.out.println("*  VIAJE FINALIZADO CON ÉXITO *");
         System.out.println("*                             *");
         System.out.println("*******************************");
+    
 
     }
 
@@ -419,7 +431,7 @@ public class App {
     public static void dañosNave() throws InterruptedException {
         System.out.println("Daños en la nave. Escaneando la estructura");
         for (int i = 0; i <= 100; i++) {
-            Thread.sleep(100);
+            Thread.sleep(50);
             System.out.println(i + "%");
         }
         System.out.println("Escaneo Completado");
@@ -443,12 +455,12 @@ public class App {
                 if (i == 0) {
                     System.out.println("Revisando el propulsor");
                     for (int e = 0; e <= 100; e++) {
-                        Thread.sleep(100);
+                        Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Cambiando las valvulas");
                     for (int e = 0; e <= 100; e++) {
-                        Thread.sleep(100);
+                        Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Arreglo completado al 100%");
@@ -462,12 +474,12 @@ public class App {
                 if (i == 1) {
                     System.out.println("Revisando el sistema de Refrigeración");
                     for (int e = 0; e <= 100; e++) {
-                        Thread.sleep(100);
+                        Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Agregando liquido refrigerante");
                     for (int e = 0; e <= 100; e++) {
-                        Thread.sleep(100);
+                        Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Arreglo completado al 100%");
@@ -481,7 +493,7 @@ public class App {
                 if (i == 2) {
                     System.out.println("Arreglando la antena de comunicación de la nave");
                     for (int e = 0; e <= 100; e++) {
-                        Thread.sleep(100);
+                        Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Arreglo completado al 100%");
@@ -515,7 +527,7 @@ public class App {
                 System.out.println(lead[0]);
                 for (int i = 0; i <= 100; i++) {
                     System.out.println(i + "%");
-                    Thread.sleep(100);
+                    Thread.sleep(50);
                 }
                 System.out.println("Rumbo redefinido completado");
                 break;
