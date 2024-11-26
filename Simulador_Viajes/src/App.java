@@ -274,11 +274,11 @@ public class App {
         // Limpiamos el Buffer
         consola.nextLine();
         consola.nextLine();
-        startTrip();
+        StartTrip();
 
     }
 
-    public static void startTrip() throws InterruptedException {
+    public static void StartTrip() throws InterruptedException {
         int porcentaje;
     
         for (porcentaje = 1; porcentaje <= 100; porcentaje++) {
