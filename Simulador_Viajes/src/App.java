@@ -274,10 +274,11 @@ public class App {
         // Limpiamos el Buffer
         consola.nextLine();
         consola.nextLine();
-        startTrip();
+        StartTrip();
 
     }
 
+<<<<<<< HEAD
     public static void startTrip() throws InterruptedException {
 
          // Calcula para la cantidad necesaria para llegar al destino
@@ -288,6 +289,9 @@ public class App {
          var totalFuel = selectedDistence * fuelConsumptionPorKm;
          System.out.println(totalFuel);
 
+=======
+    public static void StartTrip() throws InterruptedException {
+>>>>>>> 92234670740bb56cd388f9d23589c4e570d3060c
         int porcentaje;
     
         for (porcentaje = 1; porcentaje <= 100; porcentaje++) {
