@@ -38,7 +38,6 @@ public class App {
     static String[] events = { "Lluvia de Asteroides", "Daños en la Nave", "Desvio de la Nave", "Falta de Recursos" };
     static String[] states = { "Inicio del viaje", "Mitad del camino", "Llegada al destino" };
     static Random rm = new Random();
-    static int porcentaje;
     static int indiceAleatorio;
     static int opcion1;
     static int opcion;
@@ -219,9 +218,12 @@ public class App {
             System.out.println(cantPerson > selectedPassengers || cantPerson <= 0);
 
             if (cantPerson > selectedPassengers || cantPerson <= 0) {
-                System.out.println("\n╔═..══════════════════════════════════════════════════════════════════════════════..═╗");
-                System.out.println(" Error excede la capacidad de la nave o esta vacia , sera redirigido al menu de naves.");
-                System.out.println("╚═..══════════════════════════════════════════════════════════════════════════════..═╝");
+                System.out.println(
+                        "\n╔═..══════════════════════════════════════════════════════════════════════════════..═╗");
+                System.out.println(
+                        " Error excede la capacidad de la nave o esta vacia , sera redirigido al menu de naves.");
+                System.out.println(
+                        "╚═..══════════════════════════════════════════════════════════════════════════════..═╝");
                 System.out.println("Presione 'Enter' para continuar...");
                 // Este fracmento sirve para que el usuario de Enter, toco dos
                 // consola.nextLine(); porque toca Limpia el buffer de entrada, porque
@@ -229,7 +231,6 @@ public class App {
                 consola.nextLine();
                 consola.nextLine();
                 SelectNave();
-                
 
             } else {
                 Resour();
@@ -274,58 +275,104 @@ public class App {
         // Limpiamos el Buffer
         consola.nextLine();
         consola.nextLine();
-        StartTrip();
+        StartTrip(oxygen, fuel);
 
     }
 
-    public static void StartTrip() throws InterruptedException {
+    public static void StartTrip(double oxigeno, double combustible) throws InterruptedException {
+
+        // Calcula para la cantidad necesaria para llegar al destino
+        var totalOxigen = cantPerson * days * oxigenPorDayPerson;
+
+        // Calculo necesario para el combustible alcance y llegue a su destino
+        var totalFuel = selectedDistence * fuelConsumptionPorKm;
+
         int porcentaje;
-    
+        
+        double oxigenoInicial = oxigeno;
+        double combustibleInicial = combustible;
+
         for (porcentaje = 1; porcentaje <= 100; porcentaje++) {
-            if (porcentaje == 50) {
-        System.out.println("*********************************"); 
-        System.out.println("*                               *");
-        System.out.println("* VAMOS POR LA MITAD DEL CAMINO *");
-        System.out.println("*                               *"); 
-        System.out.println("*********************************");
+
+            if (porcentaje == 1) {
+                System.out.println("\n.=====================================.\r\n" +
+                        "|| * " + states[0] + "             * ||\r\n" +
+                        "`=====================================`\r\n");
             }
+
+            if (porcentaje == 50) {
+                System.out.println("\n.=====================================.\r\n" +
+                        "|| * " + states[1] + "             * ||\r\n" +
+                        "`=====================================`\r\n");
+            }
+
+            if (porcentaje == 100) {
+                System.out.println("\n.=====================================.\r\n" +
+                        "|| * " + states[2] + "            * ||\r\n" +
+                        "`=====================================`\r\n");
+            }
+
+            // Calcular reducción de recursos a medida que avanza el viaje y se reducen
+            oxigeno -= oxigenoInicial / 100;
+            combustible -= combustibleInicial / 100;
+
             int mostrarEvento = rm.nextInt(10);
-                 if (mostrarEvento < 0.3) {
-            indiceAleatorio = rm.nextInt(events.length);
-            System.out.print("  .   -- The Travel " + porcentaje + "% " + events[indiceAleatorio] + "... --" + 
-         "  .'.\r\n" + 
-         "  |o|\r\n" + 
-         " .'o'.\r\n" + 
-         " |.-.|\r\n" + 
-         " '   '\r\n" + 
-         "  ( )\r\n" + 
-         "   )\r\n" + 
-         "  ( )\r\n");
-        Thread.sleep(250);
-         stopSpaceShip();
-         System.out.println();
-         } else 
-         System.out.println("   .   -- The Travel " + porcentaje + "%" +  "... --\r\n" + 
-         "  .'.\r\n" + 
-         "  |o|\r\n" + 
-         " .'o'.\r\n" + 
-         " |.-.|\r\n" + 
-         " '   '\r\n" + 
-         "  ( )\r\n" + 
-         "   )\r\n" + 
-         "  ( )\r\n");
-        Thread.sleep(250);
-        
+
+            if (mostrarEvento < 0.3) {
+                indiceAleatorio = rm.nextInt(events.length);
+
+                System.out.printf("   Oxígeno restante: %.1f\n", oxigeno);
+                System.out.printf("   Combustible restante: %.1f\n", combustible);
+                System.out.print("  .   -- The Travel " + porcentaje + "% " + events[indiceAleatorio] + "... --" +
+                        "  .'. \r\n" +
+                        "  |o| \r\n" +
+                        " .'o'.\r\n" +
+                        " |.-.|\r\n" +
+                        " '   '\r\n" +
+                        "  ( )\r\n" +
+                        "   )\r\n" +
+                        "  ( )\r\n");
+
+                // Sirve para pausar la simulacion y el avance del viaje
+                Thread.sleep(250);
+
+                // Metodos Auxiliares
+                stopSpaceShip();
+
+            } else {
+
+                System.out.printf("       Oxígeno restante: %.1f\r\n", oxigeno);
+                System.out.printf("       Combustible restante: %.1f\r\n", combustible);
+                System.out.print("  .   -- The Travel " + porcentaje + "%" + "... --\r\n" +
+                        "  .'. \r\n" +
+                        "  |o| \r\n" +
+                        " .'o'.\r\n" +
+                        " |.-.|\r\n" +
+                        " '   '\r\n" +
+                        "  ( )\r\n" +
+                        "   )\r\n" +
+                        "  ( )\r\n");
+
+                // Sirve para pausar la simulacion y el avance del viaje
+                Thread.sleep(250);
+            }
+
+            if (oxigeno <= 0 || combustible <= 0) {
+                System.out.println("**********************************");
+                System.out.println("*  Los recursos se han agotado   *");
+                System.out.println("*  La nave se ha quedado varada  *");
+                System.out.println("**********************************");
+                System.exit(0);
+            }
+
         }
-        System.out.println();
-        System.out.println("*******************************"); 
-        System.out.println("*                             *");
-        System.out.println("*  VIAJE FINALIZADO CON ÉXITO *");
-        System.out.println("*                             *"); 
-        System.out.println("*******************************");
-        
+
+        System.out.println("*\n=================================*");
+        System.out.println("*  VIAJE FINALIZADO CON ÉXITO...  *");
+        System.out.println("*=================================*");
+
     }
-    
+
     // Metodos Auxiliares
 
     public static void stopSpaceShip() throws InterruptedException {
@@ -412,10 +459,9 @@ public class App {
 
     }
 
-    public static void dañosNave() throws InterruptedException {
+    public static void dañosNave()  {
         System.out.println("Daños en la nave. Escaneando la estructura");
         for (int i = 0; i <= 100; i++) {
-            Thread.sleep(50);
             System.out.println(i + "%");
         }
         System.out.println("Escaneo Completado");
@@ -430,8 +476,8 @@ public class App {
 
         System.out.println("Debe arreglar los daños ");
         System.out.println("a: Revisar el propulsor y cambiar las valvulas \n" +
-                         "b: Revisar el sistema de refrigeramiento \n " + 
-                         "c: Arreglar la antena" + " ");
+                "b: Revisar el sistema de refrigeramiento \n " +
+                "c: Arreglar la antena" + " ");
         String a = consola.next();
 
         switch (a) {
@@ -439,12 +485,10 @@ public class App {
                 if (i == 0) {
                     System.out.println("Revisando el propulsor");
                     for (int e = 0; e <= 100; e++) {
-                        Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Cambiando las valvulas");
                     for (int e = 0; e <= 100; e++) {
-                        Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Arreglo completado al 100%");
@@ -458,12 +502,10 @@ public class App {
                 if (i == 1) {
                     System.out.println("Revisando el sistema de Refrigeración");
                     for (int e = 0; e <= 100; e++) {
-                        Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Agregando liquido refrigerante");
                     for (int e = 0; e <= 100; e++) {
-                        Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Arreglo completado al 100%");
@@ -477,7 +519,6 @@ public class App {
                 if (i == 2) {
                     System.out.println("Arreglando la antena de comunicación de la nave");
                     for (int e = 0; e <= 100; e++) {
-                        Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Arreglo completado al 100%");
@@ -503,7 +544,7 @@ public class App {
         System.out.println("Dirigete a la cabina central y retoma el curso de la nave manualmente");
         System.out.println("*** ESTANDO EN LA CABINA ***");
         String[] lead = { "Redirigiendo rumbo de la nave", "No has redefinido el rumbo, estas perdido" };
-        System.out.println("Presiona: a para redirijir el rumbo");
+        System.out.println("Presiona: (a), para redirijir el rumbo");
         String a = consola.next();
 
         switch (a) {
