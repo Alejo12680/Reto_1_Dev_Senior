@@ -42,6 +42,11 @@ public class App {
     static int indiceAleatorio;
     static int opcion1;
     static int opcion;
+    static int ran;
+    static double oxygen;
+    static double fuel;
+    static double necessaryOxygen;
+    static double necessaryFuel;
 
     public static void main(String[] args) throws Exception {
         Menu();
@@ -262,18 +267,21 @@ public class App {
         System.out.println("\n** GESTOR DE RECURSOS DE LA NAVE **");
         System.out.println("╔═..══════════════════════════════════════════..═╗");
         System.out.print("░ Cuantas unidades de oxigeno va llevar? ");
-        double oxygen = consola.nextDouble();
+        oxygen = consola.nextDouble();
         System.out.printf("░ El oxigeno para el viaje es de %.1f unidades    ░\n\n", oxygen);
 
         System.out.print("░ Cuantos galones va llevar para el viaje? ");
-        double fuel = consola.nextDouble();
+        fuel = consola.nextDouble();
         System.out.printf("░ El combustible para el viaje es de %.1f galones ░\n", fuel);
+        
         System.out.println("╚═..══════════════════════════════════════════..═╝");
 
         System.out.println("Presione 'Enter' para iniciar el viaje...");
         // Limpiamos el Buffer
         consola.nextLine();
         consola.nextLine();
+
+
         StartTrip();
 
     }
@@ -295,23 +303,24 @@ public class App {
             int mostrarEvento = rm.nextInt(10);
                  if (mostrarEvento < 0.3) {
             indiceAleatorio = rm.nextInt(events.length);
-            System.out.print("  .   -- The Travel " + porcentaje + "% " + events[indiceAleatorio] + "... --" + 
+            System.out.print("  .   -- The Travel " + porcentaje + "% " + events[indiceAleatorio] + "... --\r\n" + 
+                                "" + 
          "  .'.\r\n" + 
          "  |o|\r\n" + 
-         " .'o'.\r\n" + 
+         " .'o'.\r\n" +         
          " |.-.|\r\n" + 
          " '   '\r\n" + 
          "  ( )\r\n" + 
          "   )\r\n" + 
          "  ( )\r\n");
+
         Thread.sleep(250);
-         stopSpaceShip();
          System.out.println();
          } else 
          System.out.println("   .   -- The Travel " + porcentaje + "%" +  "... --\r\n" + 
          "  .'.\r\n" + 
          "  |o|\r\n" + 
-         " .'o'.\r\n" + 
+         " .'o'.\r\n" +       
          " |.-.|\r\n" + 
          " '   '\r\n" + 
          "  ( )\r\n" + 
@@ -356,9 +365,9 @@ public class App {
 
         String[] random = { "Asteroide por abajo", "Asteroide por arriba", "Asteroide por la izquierda",
                 "Asteroide por la derecha" };
-        int i = rm.nextInt(random.length);
+        ran = rm.nextInt(random.length);
 
-        System.out.println("Atención " + random[i]);
+        System.out.println("Atención " + random[ran]);
 
         System.out.println(
                 "Para esquivar presione: w: para arriba, s: para abajo, a: para la izquierda, d: para la derecha.");
@@ -369,40 +378,16 @@ public class App {
         do {
             switch (direccion) {
                 case "w":
-                    if (i == 0) {
-                        System.out.println("Subiendo");
-                        System.out.println("Asteroide esquivado");
-                    } else {
-                        System.out.println("Te has estrellado con el asteroide, estas MUERTO");
-                        System.exit(0);
-                    }
+                   AsteroideArriba();
                     break;
                 case "s":
-                    if (i == 1) {
-                        System.out.println("Bajando");
-                        System.out.println("Asteroide esquivado");
-                    } else {
-                        System.out.println("Te has estrellado con el asteroide, estas MUERTO");
-                        System.exit(0);
-                    }
+                    AsteroideAbajo();
                     break;
                 case "a":
-                    if (i == 3) {
-                        System.out.println("Girando a la izquierda");
-                        System.out.println("Asteroide esquivado");
-                    } else {
-                        System.out.println("Te has estrellado con el asteroide, estas MUERTO");
-                        System.exit(0);
-                    }
+                    AsteroideIzquierda();
                     break;
                 case "d":
-                    if (i == 2) {
-                        System.out.println("Girando a la derecha");
-                        System.out.println("Asteroide esquivado");
-                    } else {
-                        System.out.println("Te has estrellado con el asteroide, estas MUERTO");
-                        System.exit(0);
-                    }
+                    AsteroideDerecha();
                     break;
                 default:
                     System.out.println("Entrada no valida");
@@ -410,6 +395,7 @@ public class App {
                     System.exit(0);
                     a = true;
                     break;
+            
             }
         } while (a = false);
 
@@ -441,12 +427,12 @@ public class App {
             case "a":
                 if (i == 0) {
                     System.out.println("Revisando el propulsor");
-                    for (int e = 0; e <= 100; e++) {
+                    for (int e = 0; e <= 50; e++) {
                         Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Cambiando las valvulas");
-                    for (int e = 0; e <= 100; e++) {
+                    for (int e = 51; e <= 100; e++) {
                         Thread.sleep(50);
                         System.out.println(e + "%");
                     }
@@ -460,12 +446,12 @@ public class App {
             case "b":
                 if (i == 1) {
                     System.out.println("Revisando el sistema de Refrigeración");
-                    for (int e = 0; e <= 100; e++) {
+                    for (int e = 0; e <= 50; e++) {
                         Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Agregando liquido refrigerante");
-                    for (int e = 0; e <= 100; e++) {
+                    for (int e = 51; e <= 100; e++) {
                         Thread.sleep(50);
                         System.out.println(e + "%");
                     }
@@ -528,6 +514,8 @@ public class App {
 
     }
 
+   
+
     public static void mostrar (){
         System.out.println("*********************************"); 
         System.out.println("*                               *");
@@ -535,4 +523,85 @@ public class App {
         System.out.println("*                               *"); 
         System.out.println("*********************************");
     }
+
+    public static void AsteroideArriba () {
+
+        if (ran == 0) {
+            System.out.println("Asteroide esquivado");
+        } else {
+           if (ran == 1) {
+            System.out.println("Te has estrellado con el asteroide, estas MUERTO");
+                        System.exit(0);
+           } else {
+                if (ran == 2) {
+                    System.out.println("Asteroide esquivado");
+                } else {
+                    if (ran == 3) {
+                        System.out.println("Asteroide esquivado");
+                    }
+                }
+           }
+    }
+
+}
+
+    public static void AsteroideAbajo(){
+        if (ran == 0) {
+            System.out.println("Te has estrellado con el asteroide, estas MUERTO");
+             System.exit(0);
+         } else {
+            if (ran == 1) {
+                System.out.println("Asteroide esquivado");
+            } else {
+                if (ran == 2) {
+                    System.out.println("Asteroide esquivado");
+                } else {
+                    if (ran == 3) {
+                        System.out.println("Asteroide esquivado");
+                    }
+                }
+            }
+         }
+    }
+
+    public static void AsteroideDerecha (){
+        if (ran == 0) {
+            System.out.println("Asteroide esquivado");
+        } else {
+            if (ran == 1) {
+                System.out.println("Asteroide esquivado");
+            } else {
+                if (ran == 2) {
+                    System.out.println("Asteroide esquivado");
+                } else {
+                    if (ran == 3) {
+                        System.out.println("Te has estrellado con el asteroide, estas MUERTO");
+                        System.exit(0);
+                    }
+                }
+            }
+        }
+    }
+
+    public static void AsteroideIzquierda (){
+
+        if (ran == 0) {
+            System.out.println("Asteroide esquivado");
+        } else {
+            if (ran == 1) {
+                System.out.println("Asteroide esquivado");
+            } else {
+                if (ran == 2) {
+                    System.out.println("Te has estrellado con el asteroide, estas MUERTO");
+                    System.exit(0);
+                } else {
+                    if (ran == 3) {
+                        System.out.println("Asteroide esquivado");
+                    }
+                }
+            }
+        }
+    } 
+
+
 }
