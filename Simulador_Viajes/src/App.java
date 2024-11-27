@@ -35,7 +35,7 @@ public class App {
     static String selectedShip = "Ninguno";
     static boolean naveSelected = false;
 
-    static String[] events = { "Lluvia de Asteroides", "Daños en la Nave", "Desvio de la Nave", "Falta de Recursos" };
+    static String[] events = { "Lluvia de Asteroides", "Daños en la Nave", "Desvio de la Nave" };
     static String[] states = { "Inicio del viaje", "Mitad del camino", "Llegada al destino" };
     static Random rm = new Random();
     static int porcentaje;
@@ -43,10 +43,6 @@ public class App {
     static int opcion1;
     static int opcion;
     static int ran;
-    static double oxygen;
-    static double fuel;
-    static double necessaryOxygen;
-    static double necessaryFuel;
 
     public static void main(String[] args) throws Exception {
         Menu();
@@ -267,21 +263,18 @@ public class App {
         System.out.println("\n** GESTOR DE RECURSOS DE LA NAVE **");
         System.out.println("╔═..══════════════════════════════════════════..═╗");
         System.out.print("░ Cuantas unidades de oxigeno va llevar? ");
-        oxygen = consola.nextDouble();
+        double oxygen = consola.nextDouble();
         System.out.printf("░ El oxigeno para el viaje es de %.1f unidades    ░\n\n", oxygen);
 
         System.out.print("░ Cuantos galones va llevar para el viaje? ");
-        fuel = consola.nextDouble();
+        double fuel = consola.nextDouble();
         System.out.printf("░ El combustible para el viaje es de %.1f galones ░\n", fuel);
-        
         System.out.println("╚═..══════════════════════════════════════════..═╝");
 
         System.out.println("Presione 'Enter' para iniciar el viaje...");
         // Limpiamos el Buffer
         consola.nextLine();
         consola.nextLine();
-
-
         StartTrip();
 
     }
@@ -303,24 +296,23 @@ public class App {
             int mostrarEvento = rm.nextInt(10);
                  if (mostrarEvento < 0.3) {
             indiceAleatorio = rm.nextInt(events.length);
-            System.out.print("  .   -- The Travel " + porcentaje + "% " + events[indiceAleatorio] + "... --\r\n" + 
-                                "" + 
+            System.out.print("  .   -- The Travel " + porcentaje + "% " + events[indiceAleatorio] + "... --" + 
          "  .'.\r\n" + 
          "  |o|\r\n" + 
-         " .'o'.\r\n" +         
+         " .'o'.\r\n" + 
          " |.-.|\r\n" + 
          " '   '\r\n" + 
          "  ( )\r\n" + 
          "   )\r\n" + 
          "  ( )\r\n");
-
         Thread.sleep(250);
+         stopSpaceShip();
          System.out.println();
          } else 
          System.out.println("   .   -- The Travel " + porcentaje + "%" +  "... --\r\n" + 
          "  .'.\r\n" + 
          "  |o|\r\n" + 
-         " .'o'.\r\n" +       
+         " .'o'.\r\n" + 
          " |.-.|\r\n" + 
          " '   '\r\n" + 
          "  ( )\r\n" + 
@@ -513,7 +505,8 @@ public class App {
         }
 
     }
-
+    
+    
    
 
     public static void mostrar (){
