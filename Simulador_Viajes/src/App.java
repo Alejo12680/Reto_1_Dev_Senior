@@ -279,6 +279,15 @@ public class App {
     }
 
     public static void startTrip() throws InterruptedException {
+
+         // Calcula para la cantidad necesaria para llegar al destino
+         var totalOxigen = cantPerson * days * oxigenPorDayPerson;
+         System.out.println(totalOxigen);
+
+         // Calculo necesario para el combustible alcance y llegue a su destino
+         var totalFuel = selectedDistence * fuelConsumptionPorKm;
+         System.out.println(totalFuel);
+
         int porcentaje;
     
         for (porcentaje = 1; porcentaje <= 100; porcentaje++) {
