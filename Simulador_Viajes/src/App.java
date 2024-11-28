@@ -35,7 +35,7 @@ public class App {
     static String selectedShip = "Ninguno";
     static boolean naveSelected = false;
 
-    static String[] events = { "Lluvia de Asteroides", "Daños en la Nave", "Desvio de la Nave", "Falta de Recursos" };
+    static String[] events = { "Lluvia de Asteroides", "Daños en la Nave", "Desvio de la Nave" };
     static String[] states = { "Inicio del viaje", "Mitad del camino", "Llegada al destino" };
     static Random rm = new Random();
     static int indiceAleatorio;
@@ -283,20 +283,22 @@ public class App {
 
         // Calcula para la cantidad necesaria para llegar al destino
         var totalOxigen = cantPerson * days * oxigenPorDayPerson;
+        /* System.out.println(totalOxigen); */
 
         // Calculo necesario para el combustible alcance y llegue a su destino
         var totalFuel = selectedDistence * fuelConsumptionPorKm;
+        /* System.out.println(totalFuel); */
 
-        int porcentaje;
-        
         double oxigenoInicial = oxigeno;
         double combustibleInicial = combustible;
+
+        int porcentaje;
 
         for (porcentaje = 1; porcentaje <= 100; porcentaje++) {
 
             if (porcentaje == 1) {
                 System.out.println("\n.=====================================.\r\n" +
-                        "|| * " + states[0] + "             * ||\r\n" +
+                        "|| * " + states[0] + "              * ||\r\n" +
                         "`=====================================`\r\n");
             }
 
@@ -312,18 +314,27 @@ public class App {
                         "`=====================================`\r\n");
             }
 
-            // Calcular reducción de recursos a medida que avanza el viaje y se reducen
+            // Calcular y mostrar el tiempo restante estimado (asumimos que cada iteración
+            // representa el 1% del tiempo total)
+            int tiempoRestante = (int) Math.round(days * (100 - porcentaje) / 100.0);
+
+            // Para mostrar el evento de los metodos auxiliares
+            int mostrarEvento = rm.nextInt(10);
+
+            // Calcular reducción de recursos del usuario a medida que avanza el viaje y se
+            // reducen
             oxigeno -= oxigenoInicial / 100;
             combustible -= combustibleInicial / 100;
 
-            int mostrarEvento = rm.nextInt(10);
+            System.out.printf("         Tiempo restante: %d días\n", tiempoRestante);
+            System.out.printf("         Oxígeno restante: %.1f\n", oxigeno);
+            System.out.printf("         Combustible restante: %.1f\n", combustible);
 
             if (mostrarEvento < 0.3) {
+
                 indiceAleatorio = rm.nextInt(events.length);
 
-                System.out.printf("   Oxígeno restante: %.1f\n", oxigeno);
-                System.out.printf("   Combustible restante: %.1f\n", combustible);
-                System.out.print("  .   -- The Travel " + porcentaje + "% " + events[indiceAleatorio] + "... --" +
+                System.out.print("   . -- The Travel " + porcentaje + "% " + events[indiceAleatorio] + "... --\r\n" +
                         "  .'. \r\n" +
                         "  |o| \r\n" +
                         " .'o'.\r\n" +
@@ -341,9 +352,7 @@ public class App {
 
             } else {
 
-                System.out.printf("       Oxígeno restante: %.1f\r\n", oxigeno);
-                System.out.printf("       Combustible restante: %.1f\r\n", combustible);
-                System.out.print("  .   -- The Travel " + porcentaje + "%" + "... --\r\n" +
+                System.out.print("   . -- The Travel " + porcentaje + "%" + "... --\r\n" +
                         "  .'. \r\n" +
                         "  |o| \r\n" +
                         " .'o'.\r\n" +
@@ -358,6 +367,11 @@ public class App {
             }
 
             if (oxigeno <= 0 || combustible <= 0) {
+                System.out.println("*  Recursos totales restantes para completar el viaje: *");
+                System.out.printf("   Oxígeno restante del total: %.1f\n",
+                        totalOxigen - (totalOxigen * porcentaje / 100));
+                System.out.printf("   Combustible restante del total: %.1f\n",
+                        totalFuel - (totalFuel * porcentaje / 100));
                 System.out.println("**********************************");
                 System.out.println("*  Los recursos se han agotado   *");
                 System.out.println("*  La nave se ha quedado varada  *");
@@ -459,11 +473,13 @@ public class App {
 
     }
 
-    public static void dañosNave()  {
+    public static void dañosNave() throws InterruptedException {
         System.out.println("Daños en la nave. Escaneando la estructura");
-        for (int i = 0; i <= 100; i++) {
+        for (int i = 20; i <= 100; i+=20) {
+            Thread.sleep(50);
             System.out.println(i + "%");
         }
+
         System.out.println("Escaneo Completado");
 
         String[] damage = { "Daño en el propulsor", "Sobrecalentamiento del motor primario",
@@ -484,11 +500,13 @@ public class App {
             case "a":
                 if (i == 0) {
                     System.out.println("Revisando el propulsor");
-                    for (int e = 0; e <= 100; e++) {
+                    for (int e = 20; e <= 100; e+=20) {
+                        Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Cambiando las valvulas");
-                    for (int e = 0; e <= 100; e++) {
+                    for (int e = 20; e <= 100; e+=20) {
+                        Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Arreglo completado al 100%");
@@ -498,14 +516,17 @@ public class App {
                     System.exit(0);
                 }
                 break;
+
             case "b":
                 if (i == 1) {
                     System.out.println("Revisando el sistema de Refrigeración");
-                    for (int e = 0; e <= 100; e++) {
+                    for (int e = 20; e <= 100; e+=20) {
+                        Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Agregando liquido refrigerante");
-                    for (int e = 0; e <= 100; e++) {
+                    for (int e = 20; e <= 100; e+=20) {
+                        Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Arreglo completado al 100%");
@@ -515,10 +536,12 @@ public class App {
                     System.exit(0);
                 }
                 break;
+
             case "c":
                 if (i == 2) {
                     System.out.println("Arreglando la antena de comunicación de la nave");
-                    for (int e = 0; e <= 100; e++) {
+                    for (int e = 20; e <= 100; e+=20) {
+                        Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Arreglo completado al 100%");
@@ -528,6 +551,7 @@ public class App {
                     System.exit(0);
                 }
                 break;
+
             default:
                 System.out.println("Entrada no valida");
                 System.out
