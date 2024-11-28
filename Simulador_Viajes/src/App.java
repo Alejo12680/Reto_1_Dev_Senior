@@ -289,8 +289,8 @@ public class App {
         var totalFuel = selectedDistence * fuelConsumptionPorKm;
         /* System.out.println(totalFuel); */
 
-        double oxigenoInicial = oxigeno;
-        double combustibleInicial = combustible;
+        double oxigenoSeleccionado = oxigeno;
+        double combustibleSeleccionado = combustible;
 
         int porcentaje;
 
@@ -323,8 +323,8 @@ public class App {
 
             // Calcular reducción de recursos del usuario a medida que avanza el viaje y se
             // reducen
-            oxigeno -= oxigenoInicial / 100;
-            combustible -= combustibleInicial / 100;
+            oxigeno -= oxigenoSeleccionado / 100;
+            combustible -= combustibleSeleccionado / 100;
 
             System.out.printf("         Tiempo restante: %d días\n", tiempoRestante);
             System.out.printf("         Oxígeno restante: %.1f\n", oxigeno);
@@ -388,6 +388,9 @@ public class App {
     }
 
     // Metodos Auxiliares
+    public static void ResourConsumo() {
+        
+    }
 
     public static void stopSpaceShip() throws InterruptedException {
 
