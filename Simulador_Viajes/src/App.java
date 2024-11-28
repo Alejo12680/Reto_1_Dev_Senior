@@ -517,6 +517,8 @@ public class App {
         System.out.println("*********************************");
     }
 
+    //Direncciones para mover la nave
+
     public static void AsteroideArriba () {
 
         if (ran == 0) {
