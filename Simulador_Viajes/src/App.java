@@ -275,62 +275,122 @@ public class App {
         // Limpiamos el Buffer
         consola.nextLine();
         consola.nextLine();
-        StartTrip();
+        StartTrip(oxygen, fuel);
 
     }
 
-    
+    public static void StartTrip(double oxigeno, double combustible) throws InterruptedException {
 
-        
-    public static void StartTrip() throws InterruptedException {
+        // Calcula para la cantidad necesaria para llegar al destino
+        var totalOxigen = cantPerson * days * oxigenPorDayPerson;
+        /* System.out.println(totalOxigen); */
+
+        // Calculo necesario para el combustible alcance y llegue a su destino
+        var totalFuel = selectedDistence * fuelConsumptionPorKm;
+        /* System.out.println(totalFuel); */
+
+        double oxigenoSeleccionado = oxigeno;
+        double combustibleSeleccionado = combustible;
+
         int porcentaje;
-    
+
         for (porcentaje = 1; porcentaje <= 100; porcentaje++) {
-            if (porcentaje == 50) {
-        System.out.println("*********************************"); 
-        System.out.println("*                               *");
-        System.out.println("* VAMOS POR LA MITAD DEL CAMINO *");
-        System.out.println("*                               *"); 
-        System.out.println("*********************************");
+
+            if (porcentaje == 1) {
+                System.out.println("\n.=====================================.\r\n" +
+                        "|| * " + states[0] + "              * ||\r\n" +
+                        "`=====================================`\r\n");
             }
+
+            if (porcentaje == 50) {
+                System.out.println("\n.=====================================.\r\n" +
+                        "|| * " + states[1] + "             * ||\r\n" +
+                        "`=====================================`\r\n");
+            }
+
+            if (porcentaje == 100) {
+                System.out.println("\n.=====================================.\r\n" +
+                        "|| * " + states[2] + "            * ||\r\n" +
+                        "`=====================================`\r\n");
+            }
+
+            // Calcular y mostrar el tiempo restante estimado (asumimos que cada iteración
+            // representa el 1% del tiempo total)
+            int tiempoRestante = (int) Math.round(days * (100 - porcentaje) / 100.0);
+
+            // Para mostrar el evento de los metodos auxiliares
             int mostrarEvento = rm.nextInt(10);
-                 if (mostrarEvento < 0.3) {
-            indiceAleatorio = rm.nextInt(events.length);
-            System.out.print("  .   -- The Travel " + porcentaje + "% " + events[indiceAleatorio] + "... --" + 
-         "  .'.\r\n" + 
-         "  |o|\r\n" + 
-         " .'o'.\r\n" + 
-         " |.-.|\r\n" + 
-         " '   '\r\n" + 
-         "  ( )\r\n" + 
-         "   )\r\n" + 
-         "  ( )\r\n");
-        Thread.sleep(250);
-         stopSpaceShip();
-         System.out.println();
-         } else 
-         System.out.println("   .   -- The Travel " + porcentaje + "%" +  "... --\r\n" + 
-         "  .'.\r\n" + 
-         "  |o|\r\n" + 
-         " .'o'.\r\n" + 
-         " |.-.|\r\n" + 
-         " '   '\r\n" + 
-         "  ( )\r\n" + 
-         "   )\r\n" + 
-         "  ( )\r\n");
-        Thread.sleep(250);
-        
+
+            // Calcular reducción de recursos del usuario a medida que avanza el viaje y se
+            // reducen
+            oxigeno -= oxigenoSeleccionado / 100;
+            combustible -= combustibleSeleccionado / 100;
+
+            System.out.printf("         Tiempo restante: %d días\n", tiempoRestante);
+            System.out.printf("         Oxígeno restante: %.1f\n", oxigeno);
+            System.out.printf("         Combustible restante: %.1f\n", combustible);
+
+            if (mostrarEvento < 0.3) {
+
+                indiceAleatorio = rm.nextInt(events.length);
+
+                System.out.print("   . -- The Travel " + porcentaje + "% " + events[indiceAleatorio] + "... --\r\n" +
+                        "  .'. \r\n" +
+                        "  |o| \r\n" +
+                        " .'o'.\r\n" +
+                        " |.-.|\r\n" +
+                        " '   '\r\n" +
+                        "  ( )\r\n" +
+                        "   )\r\n" +
+                        "  ( )\r\n");
+
+                // Sirve para pausar la simulacion y el avance del viaje
+                Thread.sleep(250);
+
+                // Metodos Auxiliares
+                stopSpaceShip();
+
+            } else {
+
+                System.out.print("   . -- The Travel " + porcentaje + "%" + "... --\r\n" +
+                        "  .'. \r\n" +
+                        "  |o| \r\n" +
+                        " .'o'.\r\n" +
+                        " |.-.|\r\n" +
+                        " '   '\r\n" +
+                        "  ( )\r\n" +
+                        "   )\r\n" +
+                        "  ( )\r\n");
+
+                // Sirve para pausar la simulacion y el avance del viaje
+                Thread.sleep(250);
+            }
+
+            if (oxigeno <= 0 || combustible <= 0) {
+                System.out.println("*  Recursos totales restantes para completar el viaje: *");
+                System.out.printf("   Oxígeno restante del total: %.1f\n",
+                        totalOxigen - (totalOxigen * porcentaje / 100));
+                System.out.printf("   Combustible restante del total: %.1f\n",
+                        totalFuel - (totalFuel * porcentaje / 100));
+                System.out.println("**********************************");
+                System.out.println("*  Los recursos se han agotado   *");
+                System.out.println("*  La nave se ha quedado varada  *");
+                System.out.println("**********************************");
+                System.exit(0);
+            }
+
         }
-        System.out.println();
-        System.out.println("*******************************"); 
-        System.out.println("*                             *");
-        System.out.println("*  VIAJE FINALIZADO CON ÉXITO *");
-        System.out.println("*                             *"); 
-        System.out.println("*******************************");
-        
+
+        System.out.println("*\n=================================*");
+        System.out.println("*  VIAJE FINALIZADO CON ÉXITO...  *");
+        System.out.println("*=================================*");
+
     }
     
     // Metodos Auxiliares
+    public static void ResourConsumo() {
+        
+    }
 
     public static void stopSpaceShip() throws InterruptedException {
 
@@ -394,11 +454,13 @@ public class App {
     }
 
     public static void dañosNave() throws InterruptedException {
+
         System.out.println("Daños en la nave. Escaneando la estructura");
-        for (int i = 0; i <= 100; i++) {
+        for (int i = 20; i <= 100; i+=20) {
             Thread.sleep(50);
             System.out.println(i + "%");
         }
+
         System.out.println("Escaneo Completado");
 
         String[] damage = { "Daño en el propulsor", "Sobrecalentamiento del motor primario",
@@ -419,12 +481,12 @@ public class App {
             case "a":
                 if (i == 0) {
                     System.out.println("Revisando el propulsor");
-                    for (int e = 0; e <= 50; e++) {
+                    for (int e = 20; e <= 100; e+=20) {
                         Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Cambiando las valvulas");
-                    for (int e = 51; e <= 100; e++) {
+                    for (int e = 20; e <= 100; e+=20) {
                         Thread.sleep(50);
                         System.out.println(e + "%");
                     }
@@ -435,15 +497,16 @@ public class App {
                     System.exit(0);
                 }
                 break;
+
             case "b":
                 if (i == 1) {
                     System.out.println("Revisando el sistema de Refrigeración");
-                    for (int e = 0; e <= 50; e++) {
+                    for (int e = 20; e <= 100; e+=20) {
                         Thread.sleep(50);
                         System.out.println(e + "%");
                     }
                     System.out.println("Agregando liquido refrigerante");
-                    for (int e = 51; e <= 100; e++) {
+                    for (int e = 20; e <= 100; e+=20) {
                         Thread.sleep(50);
                         System.out.println(e + "%");
                     }
@@ -454,10 +517,11 @@ public class App {
                     System.exit(0);
                 }
                 break;
+
             case "c":
                 if (i == 2) {
                     System.out.println("Arreglando la antena de comunicación de la nave");
-                    for (int e = 0; e <= 100; e++) {
+                    for (int e = 20; e <= 100; e+=20) {
                         Thread.sleep(50);
                         System.out.println(e + "%");
                     }
@@ -468,6 +532,7 @@ public class App {
                     System.exit(0);
                 }
                 break;
+
             default:
                 System.out.println("Entrada no valida");
                 System.out
@@ -505,17 +570,7 @@ public class App {
         }
 
     }
-    
-    
-   
 
-    public static void mostrar (){
-        System.out.println("*********************************"); 
-        System.out.println("*                               *");
-        System.out.println("* VAMOS POR LA MITAD DEL CAMINO *");
-        System.out.println("*                               *"); 
-        System.out.println("*********************************");
-    }
 
     //Direncciones para mover la nave
 
