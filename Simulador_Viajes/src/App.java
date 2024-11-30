@@ -43,6 +43,7 @@ public class App {
     static int opcion1;
     static int opcion;
     static int ran;
+    static double oxygen;
 
     public static void main(String[] args) throws Exception {
         Menu();
@@ -263,7 +264,7 @@ public class App {
         System.out.println("\n** GESTOR DE RECURSOS DE LA NAVE **");
         System.out.println("╔═..══════════════════════════════════════════..═╗");
         System.out.print("░ Cuantas unidades de oxigeno va llevar? ");
-        double oxygen = consola.nextDouble();
+        oxygen = consola.nextDouble();
         System.out.printf("░ El oxigeno para el viaje es de %.1f unidades    ░\n\n", oxygen);
 
         System.out.print("░ Cuantos galones va llevar para el viaje? ");
@@ -388,9 +389,6 @@ public class App {
     }
     
     // Metodos Auxiliares
-    public static void ResourConsumo() {
-        
-    }
 
     public static void stopSpaceShip() throws InterruptedException {
 
