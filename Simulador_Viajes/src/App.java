@@ -352,7 +352,7 @@ public class App {
                 Thread.sleep(250);
 
                 // Metodos Auxiliares
-                /* stopSpaceShip(); */
+                stopSpaceShip();
 
             } else {
 
