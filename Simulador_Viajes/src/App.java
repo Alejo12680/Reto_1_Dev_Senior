@@ -326,8 +326,8 @@ public class App {
             double recursoOxigenoAgotados = Math.round(100.0 * oxigenoSeleccionado / totalOxigen);
             double recursosFullAgotados = Math.round(100.0 * combustibleSeleccionado / totalFuel);
 
-            oxigeno -= oxigenoSeleccionado / 100; // Se reduce un 1% en cada iteración
-            combustible -= combustibleSeleccionado / 100; // Se reduce un 1% en cada iteración
+            oxigeno -= recursoOxigenoAgotados / 100; 
+            combustible -= recursosFullAgotados / 100;
 
             System.out.printf("         Tiempo restante: %d días\n", tiempoRestante);
             System.out.printf("         Oxígeno Elegido: %.1f\n", oxigeno);
@@ -351,7 +351,7 @@ public class App {
                 Thread.sleep(250);
 
                 // Metodos Auxiliares
-                stopSpaceShip();
+                /* stopSpaceShip(); */
 
             } else {
 
@@ -371,21 +371,21 @@ public class App {
 
             if (porcentaje == recursoOxigenoAgotados) {
 
-                System.out.println("******************************************************");
-                System.out.println("*  Se Agoto el oxigeno...                     *");
-                System.out.printf("*  se necesitaba %d unidades de Oxigeno para llegar. *", totalOxigen);
-                System.out.println("*  La nave se ha quedado varada               *");
-                System.out.println("******************************************************");
+                System.out.println("************************************************************");
+                System.out.println("*  Se Agoto el Oxigeno...                                  *");
+                System.out.printf("*  se necesitaba %.1f unidades de Oxigeno para llegar.\n", totalOxigen);
+                System.out.println("*  Los pasajeros se afixiaron en el viaje                  *");
+                System.out.println("************************************************************");
                 System.exit(0);
             }
 
             if (porcentaje == recursosFullAgotados) {
 
-                System.out.println("******************************************************");
-                System.out.println("*  Se Agoto el oxigeno...                     *");
-                System.out.printf("*  se necesitaba %d unidades de Oxigeno para llegar. *", totalFuel);
-                System.out.println("*  La nave se ha quedado varada               *");
-                System.out.println("******************************************************");
+                System.out.println("****************************************************************");
+                System.out.println("*  Se Agoto el Combustible...                                  *");
+                System.out.printf("*  se necesitaba %.1f unidades de combustible para llegar.\n", totalFuel);
+                System.out.println("*  La nave se ha quedado varada                                *");
+                System.out.println("****************************************************************");
                 System.exit(0);
             }
 
