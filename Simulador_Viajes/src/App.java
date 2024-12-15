@@ -267,17 +267,17 @@ public class App {
                         "___________|_|_\r\n");
 
         System.out.println("\n** GESTOR DE RECURSOS DE LA NAVE **");
-        System.out.println("╔═..══════════════════════════════════════════..═╗");
-        System.out.printf("░ Se recomienda llevar %.1f unidades de Oxigano    ░\n", totalOxigen);
+        System.out.println("╔═..════════════════════════════════════════════..═╗");
+        System.out.printf("░ Se recomienda llevar %.1f unidades de Oxigano    \n", totalOxigen);
         System.out.print("░ Cuantas unidades de oxigeno va llevar? ");
         oxygen = consola.nextDouble();
-        System.out.printf("░ El oxigeno para el viaje es de %.1f unidades    ░\n\n", oxygen);
+        System.out.printf("░ El oxigeno para el viaje es de %.1f unidades    \n\n", oxygen);
 
-        System.out.printf("░ Se recomienda llevar %.1f galones de gasolina    ░\n", totalFuel);
+        System.out.printf("░ Se recomienda llevar %.1f galones de gasolina    \n", totalFuel);
         System.out.print("░ Cuantos galones va llevar para el viaje? ");
         double fuel = consola.nextDouble();
-        System.out.printf("░ El combustible para el viaje es de %.1f galones ░\n", fuel);
-        System.out.println("╚═..══════════════════════════════════════════..═╝");
+        System.out.printf("░ El combustible para el viaje es de %.1f galones \n", fuel);
+        System.out.println("╚═..════════════════════════════════════════════..═╝");
 
         System.out.println("Presione 'Enter' para iniciar el viaje...");
         // Limpiamos el Buffer
@@ -322,17 +322,17 @@ public class App {
             // Para mostrar el evento de los metodos auxiliares
             int mostrarEvento = rm.nextInt(10);
 
-            // Calcular reducción de recursos del usuario a medida que avanza el viaje y se
-            // reducen
+            // Calcular de recursos en el cual me da el porcentaje donde se va frenar el programa si tiene menos del 100%
             double recursoOxigenoAgotados = Math.round(100.0 * oxigenoSeleccionado / totalOxigen);
             double recursosFullAgotados = Math.round(100.0 * combustibleSeleccionado / totalFuel);
 
-            oxigeno -= recursoOxigenoAgotados / 100; 
-            combustible -= recursosFullAgotados / 100;
+
+            oxigeno = oxigenoSeleccionado * (1-porcentaje / recursoOxigenoAgotados); 
+            combustible = combustibleSeleccionado * (1-porcentaje / recursosFullAgotados);
 
             System.out.printf("         Tiempo restante: %d días\n", tiempoRestante);
-            System.out.printf("         Oxígeno Elegido: %.1f\n", oxigeno);
-            System.out.printf("         Combustible Elegido: %.1f\n", combustible);
+            System.out.printf("         Oxígeno restante: %.1f\n", oxigeno);
+            System.out.printf("         Combustible restante: %.1f\n", combustible);
 
             if (mostrarEvento < 0.3) {
 
@@ -385,7 +385,7 @@ public class App {
                 System.out.println("****************************************************************");
                 System.out.println("*  Se Agoto el Combustible...                                  *");
                 System.out.printf("*  se necesitaba %.1f unidades de combustible para llegar.\n", totalFuel);
-                System.out.println("*  La nave se ha quedado varada                                *");
+                System.out.println("*  La nave se ha quedado varada en el Espacio                  *");
                 System.out.println("****************************************************************");
                 System.exit(0);
             }
@@ -477,9 +477,6 @@ public class App {
         int i = rm.nextInt(damage.length);
         System.out.println(damage[i]);
 
-        String[] arrangement = { "Revisar el propulsor y cambiar las valvulas", "Revisar el sistema de refrigeramiento",
-                "Arreglar la antena" };
-
         System.out.println("Debe arreglar los daños ");
         System.out.println(" a: Revisar el propulsor y cambiar las valvulas \n" +
                 " b: Revisar el sistema de refrigeramiento \n" +
@@ -558,7 +555,7 @@ public class App {
         System.out.println("Dirigete a la cabina central y retoma el curso de la nave manualmente");
         System.out.println("*** ESTANDO EN LA CABINA ***");
         String[] lead = { "Redirigiendo rumbo de la nave", "No has redefinido el rumbo, estas perdido" };
-        System.out.println("Presiona: a para redirijir el rumbo");
+        System.out.println("Presiona: (a) para redirijir el rumbo");
         String a = consola.next();
 
         switch (a) {
